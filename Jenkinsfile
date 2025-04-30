@@ -1,32 +1,44 @@
 pipeline {
     agent any
-
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/RAJNISH2005PRASAD/medical.git'
+                checkout([$class: 'GitSCM', 
+                    branches: [[name: '*/main']], 
+                    userRemoteConfigs: [[url: 'https://github.com/RAJNISH2005PRASAD/medical.git']]
+                ])
             }
         }
-
+        
         stage('Install Dependencies') {
             steps {
                 dir('Backend_main') {
-                    bat 'npm install'
+                    bat 'echo Installing dependencies...'  // Replace with actual command like npm install, pip install, etc.
                 }
             }
         }
-
-        stage('Run Backend (Optional for Dev)') {
+        
+        stage('Build') {
             steps {
                 dir('Backend_main') {
-                    bat 'npm start'
+                    bat 'echo Building project...'  // Replace with actual build command
                 }
             }
         }
-
-        stage('Build Complete') {
+        
+        stage('Test') {
             steps {
-                echo 'Build and setup complete.'
+                dir('Backend_main') {
+                    bat 'echo Running tests...'  // Replace with actual test command
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                dir('Backend_main') {
+                    bat 'echo Deploying application...'  // Replace with your deployment command
+                }
             }
         }
     }
