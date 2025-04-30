@@ -4,14 +4,14 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/RAJNISH2005PRASAD/medical.git'
+                git 'https://github.com/RAJNISH2005PRASAD/medical.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 dir('Backend_main') {
-                    sh 'npm install'
+                    bat 'npm install'
                 }
             }
         }
@@ -19,7 +19,7 @@ pipeline {
         stage('Run Backend (Optional for Dev)') {
             steps {
                 dir('Backend_main') {
-                    sh 'npm start'
+                    bat 'npm start'
                 }
             }
         }
