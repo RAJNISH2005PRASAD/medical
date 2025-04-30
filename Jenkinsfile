@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/RAJNISH2005PRASAD/medical.git'
+                git branch: 'main', url: 'https://github.com/RAJNISH2005PRASAD/medical.git'
             }
         }
 
